@@ -1,5 +1,5 @@
 import { useState } from "react";
-export default function Player({initialName, symbol, isActive}){
+export default function Player({initialName, symbol, isActive, onChangeName}){
     const [isEditing, setIsEditing] = useState(false);
     const [playerName, setPlayerName] = useState(initialName);
 
@@ -9,6 +9,9 @@ export default function Player({initialName, symbol, isActive}){
 
         setIsEditing( (editing) => !editing); // looks the same as above but is best practice per React man pages
                                               // Since React schedules state updates doing raw value assigns can hit race conditions in extreme situations
+        if(isEditing){
+        onChangeName(symbol, playerName);
+        }                                      
     }
 
     function handleChange(event){
